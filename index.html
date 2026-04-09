@@ -1,1 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Saathi — Your companion on this journey</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #fff9f7;
+      color: #1a1a1a;
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 2rem;
+      border-bottom: 1px solid #f0dce4;
+      background: #fff;
+    }
+    .nav-logo {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #c94b7b;
+      letter-spacing: -0.02em;
+    }
+    .nav-tagline {
+      font-size: 13px;
+      color: #999;
+    }
+
+    /* HERO */
+    .hero {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 5rem 2rem 4rem;
+      text-align: center;
+    }
+    .badge {
+      display: inline-block;
+      background: #fbeaf0;
+      color: #993556;
+      font-size: 12px;
+      padding: 5px 16px;
+      border-radius: 20px;
+      margin-bottom: 1.75rem;
+      letter-spacing: 0.03em;
+      font-weight: 500;
+    }
+    .hero h1 {
+      font-size: 2.4rem;
+      font-weight: 600;
+      color: #1a1a1a;
+      line-height: 1.25;
+      margin-bottom: 1.25rem;
+      letter-spacing: -0.02em;
+    }
+    .hero h1 span { color: #c94b7b; }
+    .hero p {
+      font-size: 1.1rem;
+      color: #555;
+      line-height: 1.8;
+      margin-bottom: 2.5rem;
+      max-width: 540px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* FORM */
+    .signup-form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-width: 400px;
+      margin: 0 auto 0.75rem;
+    }
+    .signup-form input {
+      padding: 14px 18px;
+      border: 1.5px solid #f0d0dc;
+      border-radius: 10px;
+      font-size: 15px;
+      color: #1a1a1a;
+      background: #fff;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .signup-form input:focus { border-color: #c94b7b; }
+    .signup-form button {
+      padding: 14px;
+      background: #c94b7b;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .signup-form button:hover { background: #a33560; }
+    .signup-form button:active { transform: scale(0.98); }
+    .caption {
+      font-size: 12px;
+      color: #aaa;
+      text-align: center;
+      margin-top: 0.5rem;
+    }
+
+    /* STATS */
+    .stat-row {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      margin-top: 3rem;
+      flex-wrap: wrap;
+    }
+    .stat { text-align: center; }
+    .stat .num {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #c94b7b;
+      letter-spacing: -0.02em;
+    }
+    .stat .label {
+      font-size: 12px;
+      color: #999;
+      margin-top: 3px;
+      max-width: 100px;
+    }
+
+    /* DIVIDER */
+    .divider {
+      height: 1px;
+      background: #f0dce4;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* SECTIONS */
+    .section {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+    .section h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 0.4rem;
+      letter-spacing: -0.01em;
+    }
+    .section .sub {
+      font-size: 15px;
+      color: #888;
+      margin-bottom: 2rem;
+    }
+
+    /* PAIN CARDS */
+    .pain-cards { display: flex; flex-direction: column; gap: 12px; }
+    .pain-card {
+      background: #fff;
+      border: 1px solid #f0dce4;
+      border-radius: 14px;
+      padding: 1.1rem 1.4rem;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .pain-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #c94b7b;
+      margin-top: 7px;
+      flex-shrink: 0;
+    }
+    .pain-card p { font-size: 15px; color: #444; line-height: 1.75; }
+
+    /* PILLARS */
+    .pillar-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 14px;
+    }
+    .pillar {
+      background: #fff;
+      border: 1px solid #f0dce4;
+      border-radius: 14px;
+      padding: 1.4rem;
+    }
+    .pillar-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: #fbeaf0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 14px;
+      font-size: 18px;
+    }
+    .pillar h3 {
+      font-size: 15px;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 8px;
+    }
+    .pillar p { font-size: 13px; color: #666; line-height: 1.7; }
+
+    /* FOUNDER */
+    .founder-card {
+      border-left: 3px solid #c94b7b;
+      padding: 1.5rem 1.75rem;
+      background: #fdf0f5;
+      border-radius: 0 14px 14px 0;
+    }
+    .founder-card p {
+      font-size: 15px;
+      color: #5a2035;
+      line-height: 1.85;
+      margin-bottom: 1.25rem;
+      font-style: italic;
+    }
+    .founder-card .sig-name {
+      font-size: 15px;
+      color: #993556;
+      font-weight: 600;
+    }
+    .founder-card .sig-title {
+      font-size: 12px;
+      color: #c94b7b;
+      margin-top: 3px;
+    }
+
+    /* BOTTOM CTA */
+    .bottom-cta {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 3rem 2rem 5rem;
+      text-align: center;
+    }
+    .bottom-cta p {
+      font-size: 1.05rem;
+      color: #555;
+      margin-bottom: 1.5rem;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      border-top: 1px solid #f0dce4;
+      background: #fff;
+    }
+    footer p { font-size: 12px; color: #bbb; }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 1.8rem; }
+      .stat-row { gap: 1.5rem; }
+      nav { flex-direction: column; gap: 4px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">Saathi</div>
+    <div class="nav-tagline">your companion on this journey</div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="badge">Built by a woman with PCOS, for women with PCOS</div>
+    <h1>
+      You've been confused,<br>
+      dismissed, and exhausted.<br>
+      <span>It doesn't have to feel this way.</span>
+    </h1>
+    <p>Saathi is a warm, judgment-free community for Indian women navigating PCOS and PCOD — where you finally get to understand your body, feel supported, and stop going through this alone.</p>
+
+    <div class="signup-form">
+      <input type="email" placeholder="Your email address" />
+      <button onclick="this.textContent = 'Welcome. We\'ll be in touch soon. 🌸'">
+        Get early access — it's free
+      </button>
+    </div>
+    <p class="caption">No spam. Just a community that was built for you.</p>
+
+    <div class="stat-row">
+      <div class="stat">
+        <div class="num">1 in 6</div>
+        <div class="label">Indian women have PCOS</div>
+      </div>
+      <div class="stat">
+        <div class="num">70%</div>
+        <div class="label">go undiagnosed for years</div>
+      </div>
+      <div class="stat">
+        <div class="num">5 min</div>
+        <div class="label">is all doctors give us</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- PAIN -->
+  <div class="section">
+    <h2>We know how this feels.</h2>
+    <p class="sub">Because we've been there too.</p>
+    <div class="pain-cards">
+      <div class="pain-card">
+        <div class="pain-dot"></div>
+        <p>Your doctor spent 5 minutes with you, said "lose weight and come back when you want to get pregnant" — and you left more confused than when you walked in.</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-dot"></div>
+        <p>You've googled PCOS at midnight, found yourself drowning in information about diabetes and infertility, and closed the tab feeling worse.</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-dot"></div>
+        <p>You're doing everything "right" but your body still feels like a mystery — the weight, the hair, the missed periods, the fatigue that nobody around you really understands.</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-dot"></div>
+        <p>You feel like you have to figure all of this out alone. No one in your life really gets it — and that loneliness is sometimes harder than the symptoms themselves.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- PILLARS -->
+  <div class="section">
+    <h2>Saathi is different.</h2>
+    <p class="sub">Not just an app. A community. Your community.</p>
+    <div class="pillar-grid">
+      <div class="pillar">
+        <div class="pillar-icon">🤝</div>
+        <h3>Feel seen and heard</h3>
+        <p>Women who actually understand what you're going through. No judgment, no dismissal, no "just lose weight."</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">🌿</div>
+        <h3>Built for Indian bodies</h3>
+        <p>PCOS looks different in us. Guidance that understands our food, our genetics, our stress — not advice made for someone else.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">💡</div>
+        <h3>Clarity, not confusion</h3>
+        <p>Plain language explanations of what's actually happening in your body. No jargon. No fear. Just understanding.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- FOUNDER -->
+  <div class="section" style="padding-top: 4rem; padding-bottom: 4rem;">
+    <div class="founder-card">
+      <p>"I have PCOS. I've sat in those doctor's offices, heard those dismissive words, and gone home feeling more lost than when I walked in. I'm building Saathi because I need it — and I know you do too. This is not just a medical app. This is a community. This is a companion. Your Saathi."</p>
+      <div class="sig-name">Megha Hosamani</div>
+      <div class="sig-title">Founder, Saathi — living with PCOS</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- BOTTOM CTA -->
+  <div class="bottom-cta">
+    <p>You don't have to figure this out alone.</p>
+    <div class="signup-form" style="margin: 0 auto;">
+      <input type="email" placeholder="Your email address" />
+      <button onclick="this.textContent = 'Welcome to Saathi. 🌸'">
+        Join Saathi — it's free
+      </button>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Saathi &mdash; Your companion on this journey &mdash; Made with love in India 🇮🇳</p>
+  </footer>
+
+</body>
+</html>
